@@ -21,6 +21,7 @@ export default defineConfig({
       : []),
   ],
   resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
       "@": path.resolve(path.dirname(fileURLToPath(import.meta.url)), "client", "src"),
       "@shared": path.resolve(path.dirname(fileURLToPath(import.meta.url)), "shared"),
