@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: reddit-automation-platform
+    runtime: node
+    plan: starter
+    region: oregon
+    branch: main
+    buildCommand: npm ci && npm run build && mkdir -p server/public && cp -r dist/public/* server/public/
+    startCommand: npm run start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 20.16.0
+      - key: REDDIT_CLIENT_ID
+        sync: false
+      - key: REDDIT_CLIENT_SECRET
+        sync: false
+      - key: REDDIT_USERNAME
+        sync: false
+      - key: REDDIT_PASSWORD
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://reddit-automation-platform.onrender.com
+    autoDeploy: true
+    disk:
+      name: reddit-automation-data
+      mountPath: /opt/render/project/data
+      sizeGB: 1
